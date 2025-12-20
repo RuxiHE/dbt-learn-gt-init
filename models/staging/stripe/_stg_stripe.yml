@@ -1,0 +1,30 @@
+models:
+  - name: stg_stripe__payments
+    description: Staged payment data from jaffle shop app.
+    columns:
+      - name: payment_id
+        description: The primary key for payments.
+        data_tests:
+          - unique
+          - not_null
+      - name: order_id
+        description: The foreign key to stg_orders.order_id.
+        data_tests:
+          - relationships:
+              arguments:
+                to: ref('stg_jaffle_shop__orders')
+                field: order_id
+      - name: payment_method 
+        description: The payment method used to do the payment.
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: ['credit_card', 'bank_transfer', 'gift_card', 'coupon']
+      - name: status
+        description: '{{doc("order_status")}}'
+      - name: amount
+        description: The amount of payment, in Dollar.
+      - name: date_creation_payment
+        description: date of creation.
+
+
