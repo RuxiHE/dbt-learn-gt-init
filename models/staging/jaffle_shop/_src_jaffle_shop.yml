@@ -1,7 +1,7 @@
 sources:
   - name: jaffle_shop
     description: A clone of a Postgres database
-    database: raw
+    database: dbt-tutorial
     schema: jaffle_shop
     tables:
       - name: customers

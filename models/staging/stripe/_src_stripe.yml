@@ -1,6 +1,6 @@
 sources:
   - name: stripe
-    database: raw
+    database: dbt-tutorial
     tables:
       - name: payment
         config:
