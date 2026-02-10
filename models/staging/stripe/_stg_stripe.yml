@@ -20,11 +20,11 @@ models:
           - accepted_values:
               arguments:
                 values: ['credit_card', 'bank_transfer', 'gift_card', 'coupon']
-      - name: status
+      - name: payment_status
         description: '{{doc("order_status")}}'
-      - name: amount
+      - name: payment_amount
         description: The amount of payment, in Dollar.
-      - name: date_creation_payment
+      - name: payment_created_at
         description: date of creation.
 
 

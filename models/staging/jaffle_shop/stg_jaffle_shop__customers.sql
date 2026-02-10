@@ -4,15 +4,15 @@ with source as (
 
 ),
 
-renamed as (
+transformed as (
 
-    select
+    select 
         id as customer_id,
-        first_name,
-        last_name
-
+        first_name as customer_first_name,
+        last_name as customer_last_name,
+        first_name || ' ' || last_name as customer_full_name
+        
     from source
-
 )
 
-select * from renamed
+select * from transformed

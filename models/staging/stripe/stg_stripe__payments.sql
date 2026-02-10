@@ -4,18 +4,19 @@ with source as (
 
 ),
 
-renamed as (
+transformed as (
 
-    select
+    select 
+        
         id as payment_id,
         orderid as order_id,
+        created as payment_created_at,
+        status as payment_status,
+        round(amount / 100.0, 2) as payment_amount,
         paymentmethod as payment_method,
-        status,
-        {{cents_to_dollars("amount", 2)}} as amount,
-        created as date_creation_payment
-
+        
     from source
 
 )
 
-select * from renamed
+select * from transformed

@@ -4,16 +4,17 @@ with source as (
 
 ),
 
-renamed as (
+transformed as (
 
-    select
+    select 
+        row_number() over(partition by user_id order by order_date, id) as user_order_seq,
         id as order_id,
         user_id as customer_id,
-        order_date,
-        status
+        order_date as order_placed_at,
+        status as order_status
 
     from source
 
 )
 
-select * from renamed
+select * from transformed
