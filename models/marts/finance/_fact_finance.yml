@@ -1,0 +1,17 @@
+models:
+  - name: fact_customers_orders
+    description: fact table for order and customer with customers-related metrics
+    columns:
+      - name: order_id
+        description: The identifier for orders.
+        data_tests:
+          - unique
+          - not_null
+  - name: fact_orders 
+    description: fact table for order.
+    columns:
+      - name: order_id
+        description: The identifier for orders.
+        data_tests:
+          - unique
+          - not_null
