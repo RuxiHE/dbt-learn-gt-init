@@ -1,3 +1,11 @@
+{{config(
+    materialized = 'incremental',
+    incremental_strategy = 'merge',
+    unique_key = 'order_id'        
+)    
+
+}}
+
 WITH amounts AS (
     SELECT 
         payment_id,
@@ -45,3 +53,6 @@ final AS (
 )
 
 SELECT * FROM final
+{% if is_incremental()%}
+where order_placed_at > (select max(order_placed_at) from {{this}})
+{% endif %}

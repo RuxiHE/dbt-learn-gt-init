@@ -9,9 +9,11 @@ models:
           - not_null
   - name: fact_orders 
     description: fact table for order.
-    columns:
-      - name: order_id
-        description: The identifier for orders.
-        data_tests:
-          - unique
-          - not_null
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          arguments:
+            combination_of_columns:
+              - order_id
+              - customer_id
+              - payment_id
+            quote_columns: true

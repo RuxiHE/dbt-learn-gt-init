@@ -4,7 +4,7 @@
       identifier = "customer_orders_legacy"
 ) -%}
 
-{% set old_etl_relation = adapter.get_relation(
+{% set dbt_relation = adapter.get_relation(
       database = target.database,
       schema = target.schema,
       identifier = "fact_customers_orders"
