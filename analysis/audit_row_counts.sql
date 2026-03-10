@@ -4,7 +4,6 @@
 
 {{ audit_helper.compare_row_counts(
         a_relation=old_etl_relation,
-        b_relation=dbt_relation,
-        primary_key="order_id"
+        b_relation=dbt_relation
     ) }}
 

@@ -1,0 +1,49 @@
+semantic_models: 
+  - name: order
+    model: ref("fact_orders")
+    entities:
+      - name: order
+        type: primary
+        expr: order_id
+      - name: customer
+        type: foreign
+        expr: customer_id
+      - name: payement
+        type: foreign
+        expr: payment_id
+    dimensions:
+      - name: order_at
+        expr: order_placed_at
+        type: time
+        type_params:
+          time_granularity: day
+      - name: order_status
+        expr: order_status
+        type: categorical
+      - name: payment_method
+        expr: payment_method
+        type: categorical
+    measures:
+      - name: total_revenue
+        description: the total revenue generated for each order item
+        agg: sum
+        expr: payment_amount
+      - name: order_count
+        description: the total number of order
+        agg: count_distinct
+        expr: order_id
+    metrics:
+      - name: "order_count"
+        description: the number of distinct order
+        type: simple
+        type_params:
+          - measures: order_count
+        filter: |
+            {{ Dimension('order_status')}} = 'success'
+      - name: "revenue"
+        description: the total revenue generated for each order item
+        type: simple
+        type_params:
+          - measures: total_revenue
+        filter: | 
+            {{ Dimension('order_status')}} = 'success'
